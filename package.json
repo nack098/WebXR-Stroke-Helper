@@ -1,0 +1,18 @@
+{
+  "name": "webxr_stroke_helper",
+  "version": "1.0.0",
+  "description": "WebXR for Stroke Patient",
+  "main": "app.js",
+  "dependencies": {
+    "three": "^0.168.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.2"
+  },
+  "scripts": {
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tapaneeya Odmung",
+  "license": "ISC"
+}
