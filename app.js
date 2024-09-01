@@ -1,8 +1,10 @@
 import * as THREE from "three";
 import WebGL from "three/addons/capabilities/WebGL.js";
 import { XRButton } from "three/addons/webxr/XRButton.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
 import Settings, { updateSettings } from "./src/utilities.js";
-import Sample1 from "./sample/sample1.js";
+import MainScene from "./scenes/mainScene.js";
 
 class App {
   currentScene;
@@ -18,7 +20,7 @@ class App {
     document.body.appendChild(renderer.domElement);
     this.renderer = renderer;
 
-    const scene = new Sample1();
+    const scene = new MainScene();
     this.currentScene = scene;
 
     document.body.appendChild(
@@ -30,6 +32,7 @@ class App {
         },
       }),
     );
+    const controls = new OrbitControls(scene.camera, renderer.domElement);
   }
 
   start() {
