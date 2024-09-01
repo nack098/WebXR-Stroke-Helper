@@ -1,5 +1,5 @@
 import { Scene as THREE_SCENE, PerspectiveCamera } from "three";
-import Settings from "./utilities.js";
+import Settings from "@/utilities.js";
 
 class Scene {
   scene;

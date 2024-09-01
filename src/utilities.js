@@ -1,4 +1,4 @@
-import * as settings from "../settings.json";
+import * as settings from "/settings.json";
 
 const Settings = {
   ...settings,

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import Scene from "../src/scene.js";
+import Scene from "@/scene.js";
 
 class Sample2 extends Scene {
   static mesh = {
