@@ -1,20 +1,50 @@
 import * as THREE from "three";
 import WebGL from "three/addons/capabilities/WebGL.js";
-import Settings from "./src/utilities.js";
-import Sample2 from "./sample/sample2.js";
+import { XRButton } from "three/addons/webxr/XRButton.js";
+import Settings, { updateSettings } from "./src/utilities.js";
+import Sample1 from "./sample/sample1.js";
 
 class App {
+  currentScene;
+  renderer;
   constructor() {
     if (!WebGL.isWebGL2Available()) {
       const warning = WebGL.getWebGL2ErrorMessage();
       document.body.appendChild(warning);
     }
-    const currentScene = new Sample2();
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(Settings.WIDTH, Settings.HEIGHT);
+    renderer.xr.enabled = true;
     document.body.appendChild(renderer.domElement);
-    renderer.render(currentScene.scene, currentScene.camera);
-    renderer.setAnimationLoop(currentScene.createAnimationLoop(renderer));
+    this.renderer = renderer;
+
+    const scene = new Sample1();
+    this.currentScene = scene;
+
+    document.body.appendChild(
+      XRButton.createButton(renderer, {
+        optionalFeatures: ["depth-sensing"],
+        depthSensing: {
+          usagePreference: ["gpu-optimized"],
+          dataFormatPreference: [],
+        },
+      }),
+    );
+  }
+
+  start() {
+    this.renderer.render(this.currentScene.scene, this.currentScene.camera);
+    this.renderer.setAnimationLoop(
+      this.currentScene.createAnimationLoop(this.renderer),
+    );
+    window.addEventListener("resize", () => this.onResize());
+  }
+
+  onResize() {
+    updateSettings();
+    this.currentScene.camera.aspect = Settings.ASPECT;
+    this.currentScene.camera.updateProjectionMatrix();
+    this.renderer.setSize(Settings.WIDTH, Settings.HEIGHT);
   }
 }
 

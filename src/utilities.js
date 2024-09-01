@@ -7,4 +7,12 @@ const Settings = {
   HEIGHT: window.innerHeight,
 };
 
+const updateSettings = () => {
+  Settings.ASPECT = window.innerWidth / window.innerHeight;
+  Settings.WIDTH = window.innerWidth;
+  Settings.HEIGHT = window.innerHeight;
+};
+
 export default Settings;
+
+export { updateSettings };
